@@ -328,6 +328,169 @@ const tandadalenMap = [
     { name: "skistar-snow-park-red", left: 44.79, top: 54.38 },
     { name: "skistar-snow-park-blue", left: 46.23, top: 58.91 }
 ];
+const areByMap = [
+    { name: "skistar-snow-park-svart-linje", left: 22.21, top: 50.78 },
+    { name: "skistar-snow-park-röd-linje", left: 22.52, top: 53.42 },
+    { name: "skistar-snow-park-blå-linje", left: 25.97, top: 50.23 },
+    { name: "skistar-snow-park-blå-linje", left: 29.13, top: 52.09 },
+    { name: "störtloppet-långzon", left: 41.27, top: 59.47 },
+    { name: "slalombacken", left: 64.34, top: 63.89 },
+    { name: "hummelbranten", left: 67.09, top: 46.73 },
+    { name: "rödingen", left: 14.47, top: 35.26 },
+    { name: "rödbäcken", left: 16.17, top: 35.67 },
+    { name: "rödbranten", left: 16.78, top: 40.86 },
+    { name: "lundsrappet", left: 38.70, top: 64.61 },
+    { name: "gästrappet", left: 42.41, top: 71.39 },
+    { name: "vmsstörtloppet", left: 46.82, top: 69.82 },
+    { name: "worldcupbacken", left: 68.37, top: 63.13 },
+    { name: "månbranten", left: 70.41, top: 64.77 },
+    { name: "stjärnbacken", left: 72.69, top: 62.07 },
+    { name: "snobbrännan", left: 75.23, top: 56.37 },
+    { name: "pelikansvängen", left: 67.36, top: 44.05 },
+    { name: "tottbacken", left: 81.04, top: 68.00 },
+    { name: "bibbos-brant", left: 83.82, top: 49.82 },
+    { name: "fjällblicken", left: 95.36, top: 50.23 },
+    { name: "ullåhöa", left: 12.29, top: 29.85 },
+    { name: "ullådraget", left: 6.88, top: 36.06 },
+    { name: "långsvängen-långzon", left: 14.89, top: 31.00 },
+    { name: "ripleden", left: 16.39, top: 32.97 },
+    { name: "röde-orm", left: 9.53, top: 43.05 },
+    { name: "liten-röd", left: 14.72, top: 44.39 },
+    { name: "rödkulleleden", left: 20.26, top: 45.77 },
+    { name: "worldcupleden", left: 54.42, top: 47.33 },
+    { name: "åreleden-långzon", left: 35.56, top: 43.14 },
+    { name: "bräckeleden", left: 52.04, top: 52.82 },
+    { name: "tvättbrädan", left: 73.15, top: 48.85 },
+    { name: "vm-leden", left: 59.50, top: 45.24 },
+    { name: "tottbryggan", left: 79.39, top: 63.20 },
+    { name: "ullåmon", left: 15.20, top: 27.62 },
+    { name: "ripan", left: 12.11, top: 45.04 },
+    { name: "valles-äventyrsbana", left: 10.82, top: 44.70 },
+    { name: "rödhaken", left: 11.69, top: 54.60 },
+    { name: "rullband-rödkullen", left: 10.73, top: 57.31 },
+    { name: "bergbanan", left: 69.11, top: 83.22 },
+    { name: "rödhakeliften", left: 12.93, top: 57.39 },
+    { name: "ripanliften-1", left: 12.93, top: 50.11 },
+    { name: "ripanliften-2", left: 12.93, top: 50.11 },
+    { name: "ullådalsliften-1", left: 2.24, top: 36.77 },
+    { name: "ullådalsliften-2", left: 2.24, top: 36.77 },
+    { name: "rödkulleliften-1", left: 14.00, top: 52.90 },
+    { name: "rödkulleliften-2", left: 14.00, top: 52.90 },
+    { name: "bräckeliften", left: 28.24, top: 62.14 },
+    { name: "tottliften", left: 77.02, top: 70.12 },
+    { name: "vm8:an", left: 45.03, top: 82.68 },
+    { name: "stjärnliften", left: 64.45, top: 78.22 },
+    { name: "vm6:an", left: 65.88, top: 78.30 },
+    { name: "hummelliften", left: 76.21, top: 53.44 },
+    { name: "fjällgårdsexpressen", left: 78.55, top: 59.44 }
+];
+const areHogzonMap = [
+    { name: "störtloppet-högzon", left: 44.91, top: 23.59 },
+    { name: "röda-rappet", left: 44.57, top: 20.38 },
+    { name: "tusenmetersbacken", left: 53.30, top: 19.15 },
+    { name: "fjällbacken", left: 56.66, top: 21.65 },
+    { name: "tvärävalvsbacken", left: 35.81, top: 19.26 },
+    { name: "stendalsbacken", left: 29.28, top: 27.66 },
+    { name: "långsvängen-högzon", left: 26.30, top: 30.38 },
+    { name: "åreleden-högzon", left: 39.40, top: 25.51 },
+    { name: "svartbergsleden", left: 59.01, top: 40.75 },
+    { name: "tväråleden", left: 30.49, top: 24.80 },
+    { name: "solravinen", left: 27.92, top: 26.17 },
+    { name: "renleden", left: 21.76, top: 29.58 },
+    { name: "stendalsleden", left: 25.67, top: 24.52 },
+    { name: "stendalsliften", left: 24.48, top: 28.18 },
+    { name: "nedre-tväråvalvsliften-1", left: 29.62, top: 23.36 },
+    { name: "nedre-tväråvalvsliften-2", left: 29.62, top: 23.36 },
+    { name: "övre-tväråvalvsliften", left: 42.63, top: 16.58 },
+    { name: "gondolen", left: 41.20, top: 42.52 },
+    { name: "kabinbanan", left: 62.87, top: 78.07 }
+];
+const areBjornenMap = [
+    { name: "viksvängen", left: 24.90, top: 43.86 },
+    { name: "högåsbacken", left: 25.93, top: 56.31 },
+    { name: "björnenleden", left: 8.17, top: 16.82 },
+    { name: "fröåsvängen", left: 18.92, top: 24.29 },
+    { name: "sadelbacken", left: 26.35, top: 39.74 },
+    { name: "sadelleden", left: 22.27, top: 35.52 },
+    { name: "björnbacken", left: 62.52, top: 43.19 },
+    { name: "järvbacken", left: 82.29, top: 21.86 },
+    { name: "järvsvängen", left: 83.97, top: 27.14 },
+    { name: "björnladent", left: 84.07, top: 22.49 },
+    { name: "getvalsbacken", left: 23.63, top: 25.67 },
+    { name: "hermelinbacken", left: 52.22, top: 41.53 },
+    { name: "vargenbacken", left: 58.43, top: 37.62 },
+    { name: "lokattsbacken", left: 66.88, top: 42.55 },
+    { name: "mårdbacken", left: 71.33, top: 47.43 },
+    { name: "nallebacken", left: 71.79, top: 36.51 },
+    { name: "örnleden", left: 92.53, top: 26.30 },
+    { name: "örnbacken", left: 96.97, top: 23.96 },
+    { name: "vesslan-rullband-björnen", left: 68.52, top: 49.32 },
+    { name: "lokattliften", left: 65.29, top: 49.00 },
+    { name: "vargenliften", left: 64.93, top: 40.22 },
+    { name: "mårdenliften", left: 75.43, top: 51.30 },
+    { name: "nalleliften", left: 68.91, top: 39.26 },
+    { name: "copperhill-liften", left: 94.49, top: 25.51 },
+    { name: "högåsliften", left: 33.10, top: 73.74 },
+    { name: "hermelinenliften", left: 34.36, top: 61.95 },
+    { name: "björnenliften", left: 61.98, top: 69.06 },
+    { name: "järvenliften", left: 70.41, top: 41.21 },
+    { name: "vikliften", left: 29.80, top: 49.90 },
+    { name: "getvalsliften", left: 36.52, top: 32.28 },
+    { name: "sadelexpressen", left: 35.10, top: 72.50 }
+];
+const areDuvedMap = [
+    { name: "skistar-snow-park", left: 23.61, top: 45.18 },
+    { name: "träningsbacken-puckeln", left: 27.76, top: 53.29 },
+    { name: "hamrebacken", left: 26.76, top: 24.05 },
+    { name: "mullfjällsbacken", left: 32.50, top: 25.32 },
+    { name: "träningsbacken", left: 31.04, top: 38.15 },
+    { name: "leråbacken", left: 36.75, top: 51.03 },
+    { name: "tegebacken", left: 73.35, top: 43.03 },
+    { name: "tegesvängen", left: 78.13, top: 40.95 },
+    { name: "englandsbacken", left: 52.55, top: 53.73 },
+    { name: "gunnilbacken", left: 72.63, top: 49.45 },
+    { name: "vildmarksstigen", left: 73.38, top: 26.78 },
+    { name: "tegeleden", left: 72.35, top: 55.94 },
+    { name: "fjällbacken", left: 78.48, top: 28.54 },
+    { name: "bergesvängen", left: 84.02, top: 23.35 },
+    { name: "lillåleden", left: 88.94, top: 23.88 },
+    { name: "byspåret", left: 4.33, top: 78.87 },
+    { name: "torpbacken", left: 20.88, top: 71.39 },
+    { name: "dalbacken", left: 22.57, top: 72.34 },
+    { name: "minitege", left: 86.56, top: 80.34 },
+    { name: "dr1-rullband-duved", left: 20.23, top: 74.05 },
+    { name: "dr2-rullband-tegefjäll", left: 84.72, top: 83.03 },
+    { name: "byliften", left: 2.90, top: 88.97 },
+    { name: "torpliften", left: 23.54, top: 74.68 },
+    { name: "mini-tege", left: 87.36, top: 83.91 },
+    { name: "hamreliften", left: 6.10, top: 77.86 },
+    { name: "leråliften", left: 25.77, top: 75.18 },
+    { name: "englasliften", left: 62.24, top: 72.35 },
+    { name: "gunnilliften", left: 64.58, top: 74.06 },
+    { name: "fjällvallsliften", left: 95.16, top: 34.95 },
+    { name: "duveds-linbana", left: 13.07, top: 75.76 },
+    { name: "tegeliften", left: 85.30, top: 72.37 }
+];
+
+
+
+
+// ==========================================
+// --- KART-REGISTER (DICTIONARY) ---
+// ==========================================
+// Här kopplar vi ihop en del av URL:en (t.ex. "are-by") med rätt data och bild.
+const mapRegistry = {
+    "hundfjallet": { data: typeof hundfjalletMap !== 'undefined' ? hundfjalletMap : [], image: "pics/orter/salen_hundfjallet.webp" },
+    "hogfjallet": { data: typeof hogfjalletMap !== 'undefined' ? hogfjalletMap : [], image: "pics/orter/salen_hogfjallet.webp" },
+    "lindvallen": { data: typeof lindvallenMap !== 'undefined' ? lindvallenMap : [], image: "pics/orter/salen_lindvallen.webp" },
+    "tandadalen": { data: typeof tandadalenMap !== 'undefined' ? tandadalenMap : [], image: "pics/orter/salen_tandadalen.webp" },
+    
+    // -- ÅRE --
+    "are-by": { data: typeof areByMap !== 'undefined' ? areByMap : [], image: "pics/orter/are_by.webp" },
+    "hogzon": { data: typeof areHogzonMap !== 'undefined' ? areHogzonMap : [], image: "pics/orter/are_hogzon.webp" },
+    "bjornen": { data: typeof areBjornenMap !== 'undefined' ? areBjornenMap : [], image: "pics/orter/are_bjornen.webp" },
+    "duved-tegefjall": { data: typeof areDuvedMap !== 'undefined' ? areDuvedMap : [], image: "pics/orter/are_duved-tegefjall.webp" }
+};
 
 
 // ==========================================
@@ -545,6 +708,7 @@ async function fetchSkistarLifts(targetUrl) {
             // Avgör om kategorin tillhör "Backar" eller "Liftar"
             const hasSlopeIcon = group.querySelector('.ssg-lpv__slope-icon') !== null;
             const isSlopeDeviation = categoryName.toLowerCase().includes('pister') || categoryName.toLowerCase().includes('backar');
+            const isTrain = categoryName.toLowerCase().includes('bergbana');
             const type = (hasSlopeIcon || isSlopeDeviation) ? 'slope' : 'lift';
 
             const items = group.querySelectorAll('.lpv-list__item');
@@ -600,7 +764,9 @@ async function fetchSkistarLifts(targetUrl) {
             return;
         }
 
-        // Hjälpfunktion: Sätter rätt ikon baserat på namnet på lift/pist
+        // ==========================================
+        // --- IKON- OCH HJÄLPFUNKTIONER ---
+        // ==========================================
         function getDifficultyIcon(categoryName) {
             const name = (categoryName || "").toLowerCase();
             let iconHtml = '';
@@ -618,8 +784,11 @@ async function fetchSkistarLifts(targetUrl) {
                 iconHtml = '<img src="pics/skidor.png" alt="Park" class="park-icon-img">';
             }
             // Liftar
-            else if (name.includes("gondol") || name.includes("kabin") || name.includes("telemix")) {
-                iconHtml = '<img src="pics/lyft.png" alt="Gondol" class="lift-icon-img">';
+            else if (name.includes("gondol") || name.includes("telemix")) {
+                iconHtml = '<img src="pics/gondol.png" alt="Gondol" class="lift-icon-img">';
+            }
+            else if (name.includes("kabin")) {
+                iconHtml = '<img src="pics/kabin.png" alt="Kabin" class="lift-icon-img">';
             }
             else if (name.includes("stol")) {
                 iconHtml = '<img src="pics/sittlyft.png" alt="Stollift" class="lift-icon-img">';
@@ -632,6 +801,9 @@ async function fetchSkistarLifts(targetUrl) {
             }
             else if (name.includes("rullband")) {
                 iconHtml = '<img src="pics/rullband.png" alt="Rullband" class="lift-icon-img">';
+            }
+            else if (name.includes("bergbana")) {
+                iconHtml = '<img src="pics/bergbanor.png" alt="Bergbana" class="lift-icon-img">';
             }
             else {
                 iconHtml = '<img src="pics/sittlyft.png" alt="Lift" class="lift-icon-img">'; // Fallback
@@ -670,19 +842,34 @@ async function fetchSkistarLifts(targetUrl) {
                     const li = document.createElement('li');
                     const statusClass = item.isOpen ? 'status-open' : 'status-closed';
                     
-                    li.classList.add('clickable-row');
-                    li.addEventListener('click', () => {
-                        openFullscreenMap(item.name, targetUrl, allScrapedItems); 
-                    });
+                    // 1. Fråga registret: Har vi en karta för den här orten (targetUrl)?
+                    const hasMap = Object.keys(mapRegistry).some(key => targetUrl.includes(key));
 
-                    li.innerHTML = `
-                        <div style="display: flex; align-items: center;">
-                            ${categoryIcon}
-                            <span>${item.name}</span>
-                        </div>
-                        <span class="${statusClass}">${item.status}</span>
-                    `;
-                    ul.appendChild(li);
+                    // Rita ut varje enskild lift/backe i kategorin
+                    group.items.forEach(item => {
+                        const li = document.createElement('li');
+                        const statusClass = item.isOpen ? 'status-open' : 'status-closed';
+                        
+                        // 2. Lägg BARA till klick-funktionen om hasMap är true
+                        if (hasMap) {
+                            li.classList.add('clickable-row');
+                            li.addEventListener('click', () => {
+                                openFullscreenMap(item.name, targetUrl, allScrapedItems); 
+                            });
+                        } else {
+                            // Annars, låt muspekaren vara en vanlig pil (inte en klick-hand)
+                            li.style.cursor = 'default';
+                        }
+
+                        li.innerHTML = `
+                            <div style="display: flex; align-items: center;">
+                                ${categoryIcon}
+                                <span>${item.name}</span>
+                            </div>
+                            <span class="${statusClass}">${item.status}</span>
+                        `;
+                        ul.appendChild(li);
+                    });
                 });
 
                 details.appendChild(ul);
@@ -693,11 +880,22 @@ async function fetchSkistarLifts(targetUrl) {
             return { totalOpen, totalItems };
         }
 
-        // Slå ihop alla hämtade objekt till en platt lista (används för kartfunktionen)
-        const allScrapedItems = [];
-        liftsData.forEach(g => allScrapedItems.push(...g.items));
-        slopesData.forEach(g => allScrapedItems.push(...g.items));
+        // Slå ihop alla hämtade objekt till en platt lista och SPARA KATEGORIN (Viktigt för kart-menyn!)
+            const allScrapedItems = [];
 
+            liftsData.forEach(group => {
+                group.items.forEach(item => {
+                    // Lägger till 'category' och 'type' på varje lift
+                    allScrapedItems.push({ ...item, category: group.categoryName, type: 'lift' });
+                });
+            });
+
+            slopesData.forEach(group => {
+                group.items.forEach(item => {
+                    // Lägger till 'category' och 'type' på varje pist
+                    allScrapedItems.push({ ...item, category: group.categoryName, type: 'slope' });
+                });
+            });
         // Starta renderingen
         const liftTotals = renderCategories(liftsOnlyList, liftsData, 'liftCount');
         const slopeTotals = renderCategories(slopesOnlyList, slopesData, 'slopeCount');
@@ -893,6 +1091,11 @@ document.getElementById('searchBtn').addEventListener('click', async () => {
 
 let currentZoom = 300; 
 let minZoom = 100;
+
+let currentMapItems = [];
+let currentMapType = 'lift';
+let currentTargetUrl = "";
+
 const mapScrollContainer = document.getElementById('mapScrollContainer');
 const mapZoomWrapper = document.getElementById('mapZoomWrapper');
 const mapImg = document.getElementById('modalMapImage');
@@ -908,31 +1111,154 @@ function fadeOutMarker() {
     }
 }
 
+// Skapar listan över liftar/pister inuti kartan
+function renderMapSideMenu(type) {
+    const listContainer = document.getElementById('mapMenuList');
+    if (!listContainer) return;
+    listContainer.innerHTML = "";
+    currentMapType = type;
+
+    // Gruppera föremålen baserat på kategorin, och räkna totalen!
+    const grouped = {};
+    let tabTotalItems = 0;
+    let tabOpenItems = 0;
+
+    currentMapItems.forEach(item => {
+        if (item.type !== type) return;
+        
+        const cat = item.category || "Övrigt";
+        if (!grouped[cat]) grouped[cat] = [];
+        grouped[cat].push(item);
+
+        // Räkna hur många som är öppna av alla i denna flik (Liftar eller Pister)
+        tabTotalItems++;
+        if (item.isOpen) tabOpenItems++;
+    });
+
+    // Inbyggd ikon-byggare
+    function getMenuIcon(catName) {
+        const n = catName.toLowerCase();
+        let innerContent = ''; 
+
+        if (n.includes("mycket lätt")) innerContent = '<span class="difficulty-icon icon-very-easy"></span>';
+        else if (n.includes("lätt")) innerContent = '<span class="difficulty-icon icon-easy"></span>';
+        else if (n.includes("medelsvår")) innerContent = '<span class="difficulty-icon icon-intermediate"></span>';
+        else if (n.includes("svår")) innerContent = '<span class="difficulty-icon icon-difficult"></span>';
+        else {
+            let img = 'sittlyft.png'; 
+            if (n.includes("avvikelse")) img = 'varning.png';
+            else if (n.includes("övrig") || n.includes("park") || n.includes("arena")) img = 'skidor.png';
+            else if (n.includes("gondol") || n.includes("telemix")) img = 'gondol.png';
+            else if (n.includes("kabin")) img = 'kabin.png';
+            else if (n.includes("stol")) img = 'sittlyft.png';
+            else if (n.includes("bygel") || n.includes("ankar")) img = 'ankarlyft.png';
+            else if (n.includes("knapp")) img = 'knapplyft.png';
+            else if (n.includes("rullband")) img = 'rullband.png';
+            else if (n.includes("bergbana")) img = 'bergbanor.png';
+            
+            innerContent = `<img src="pics/${img}" style="max-width:18px; max-height:18px; object-fit:contain;">`;
+        }
+        return `<div class="icon-slot" style="width:24px; height:24px; display:flex; justify-content:center; align-items:center; flex-shrink:0;">${innerContent}</div>`;
+    }
+
+    // --- NYTT: Skapa rubriken högst upp som visar "X/Y öppna" ---
+    const statsHeader = document.createElement('div');
+    statsHeader.style.padding = "10px 15px";
+    statsHeader.style.borderBottom = "1px solid #eee";
+    statsHeader.style.fontWeight = "bold";
+    statsHeader.style.color = "#48A6A7"; // Din teal-färg
+    statsHeader.style.fontSize = "13px";
+    statsHeader.style.textAlign = "center";
+    statsHeader.style.backgroundColor = "#f8fafc";
+    statsHeader.innerText = `${tabOpenItems}/${tabTotalItems} öppna`;
+    listContainer.appendChild(statsHeader);
+    // ------------------------------------------------------------
+
+    // Skapa dragspelsmenyerna för varje kategori
+    for (const category in grouped) {
+        const categoryItems = grouped[category];
+        
+        // Räkna öppna per specifik kategori (t.ex. Stolliftar)
+        const categoryTotal = categoryItems.length;
+        const categoryOpen = categoryItems.filter(i => i.isOpen).length;
+
+        const details = document.createElement('details');
+        const iconHtml = getMenuIcon(category); 
+        
+        const summary = document.createElement('summary');
+        // NYTT: Nu visar den (Öppna/Totala) istället för bara (Totala) bredvid pilen
+        summary.innerHTML = `
+            <div style="display: flex; align-items: center; flex-grow: 1;">
+                ${iconHtml} 
+                <span style="margin-left: 12px;">${category}</span> 
+            </div>
+            <span style="font-weight:normal; font-size:12px; color:#94a3b8;">(${categoryOpen}/${categoryTotal})</span>
+        `;
+        
+        const ul = document.createElement('ul');
+        categoryItems.forEach(item => {
+            const li = document.createElement('li');
+            const color = item.isOpen ? '#48A6A7' : '#e53e3e';
+            
+            li.style.display = "flex";
+            li.style.justifyContent = "space-between";
+            li.style.alignItems = "center";
+            
+            li.innerHTML = `
+                <span>${item.name}</span>
+                <div class="status-dot" style="background: ${color}; width: 8px; height: 8px; border-radius: 50%; margin-left: 10px; flex-shrink: 0;"></div>
+            `;
+            
+            li.onclick = (e) => {
+                e.stopPropagation();
+                
+                // Stäng menyn och ta fram zoom-knapparna igen
+                const menu = document.getElementById('mapSideMenu');
+                const toggleBtn = document.getElementById('toggleMapMenu');
+                const zoomControls = document.getElementById('mapZoomControls');
+                
+                if (menu) menu.classList.add('hidden');
+                if (toggleBtn) toggleBtn.classList.remove('open');
+                if (zoomControls) {
+                    zoomControls.style.opacity = '1';
+                    zoomControls.style.pointerEvents = 'auto';
+                }
+
+                // Panorera till vald pist/lift
+                openFullscreenMap(item.name, currentTargetUrl, currentMapItems);
+            };
+            ul.appendChild(li);
+        });
+
+        details.appendChild(summary);
+        details.appendChild(ul);
+        listContainer.appendChild(details);
+    }
+}
+
+
+
 // Öppnar kartan över valt område och centrerar/radar-markerar den valda liften/backen
 function openFullscreenMap(itemName, targetUrl, scrapedItems) {
+
+    currentTargetUrl = targetUrl;
+    currentMapItems = scrapedItems || [];
+
     let currentMapData = null;
     let currentImageSrc = "";
 
-    // Matcha URL:en mot rätt lokala karta
-    if (targetUrl.includes("hundfjallet")) {
-        currentMapData = hundfjalletMap;
-        currentImageSrc = "pics/orter/salen_hundfjallet.webp"; 
-    } 
-    else if (targetUrl.includes("hogfjallet")) {
-        currentMapData = typeof hogfjalletMap !== 'undefined' ? hogfjalletMap : [];
-        currentImageSrc = "pics/orter/salen_hogfjallet.webp";
-    } 
-    else if (targetUrl.includes("lindvallen")) {
-        currentMapData = typeof lindvallenMap !== 'undefined' ? lindvallenMap : [];
-        currentImageSrc = "pics/orter/salen_lindvallen.webp";
-    } 
-    else if (targetUrl.includes("tandadalen")) {
-        currentMapData = typeof tandadalenMap !== 'undefined' ? tandadalenMap : [];
-        currentImageSrc = "pics/orter/salen_tandadalen.webp";
+
+    // MAGIN: Vi loopar snabbt igenom registret. Om URL:en matchar en nyckel, hämta kartan!
+    for (const key in mapRegistry) {
+        if (targetUrl.includes(key)) {
+            currentMapData = mapRegistry[key].data;
+            currentImageSrc = mapRegistry[key].image;
+            break; // Avbryt loopen när vi hittat rätt
+        }
     }
 
-    if (!currentImageSrc) return; // Avbryter tyst om ingen bild finns
-
+    if (!currentImageSrc || !currentMapData) return;
+    
     // Försök hitta den specifika liften/backens koordinater
     const mappedItem = currentMapData.find(m => {
         const cleanMapName = m.name.toLowerCase().replace(/[-\s]/g, '');
@@ -998,21 +1324,33 @@ function openFullscreenMap(itemName, targetUrl, scrapedItems) {
             const targetX = (mappedItem.left / 100) * mapWidth;
             const targetY = (mappedItem.top / 100) * mapHeight;
 
-            mapScrollContainer.scrollLeft = targetX - (cWidth / 2);
-            mapScrollContainer.scrollTop = targetY - (cHeight / 2);
+            // --- NYTT: Mjuk och smooth panorering till målet ---
+            mapScrollContainer.scrollTo({
+                left: targetX - (cWidth / 2),
+                top: targetY - (cHeight / 2),
+                behavior: 'smooth'
+            });
+            // ----------------------------------------------------
+
         } else {
             // Inga koordinater: Zooma ut kartan helt så man ser allt (ingen radar)
             currentZoom = minZoom;
             mapZoomWrapper.style.width = currentZoom + '%';
-            mapScrollContainer.scrollLeft = 0;
-            mapScrollContainer.scrollTop = 0;
+            
+            // --- NYTT: Mjuk panorering tillbaka till toppen ---
+            mapScrollContainer.scrollTo({
+                left: 0,
+                top: 0,
+                behavior: 'smooth'
+            });
+            // ----------------------------------------------------
         }
     };
 
     mapImg.src = currentImageSrc;
 
+    renderMapSideMenu(currentMapType);
 
-    
 }
 
 
@@ -1132,6 +1470,51 @@ document.querySelector('.close-modal').addEventListener('click', closeModal);
 document.getElementById('mapModal').addEventListener('click', (e) => {
     if (e.target.id === 'mapModal') closeModal(); // Stänger om man klickar på bakgrunden
 });
+
+
+// Öppna/Stäng sidomenyn på kartan
+const toggleMapBtn = document.getElementById('toggleMapMenu');
+if (toggleMapBtn) {
+    toggleMapBtn.onclick = () => {
+        const menu = document.getElementById('mapSideMenu');
+        const zoomControls = document.getElementById('mapZoomControls');
+        
+        // Öppna/stäng menyn
+        menu.classList.toggle('hidden');
+        toggleMapBtn.classList.toggle('open');
+        
+        // Göm eller visa zoom-knapparna beroende på om menyn är öppen
+        if (!menu.classList.contains('hidden')) {
+            // Menyn är öppen: Göm zoom-knapparna
+            zoomControls.style.opacity = '0';
+            zoomControls.style.pointerEvents = 'none'; // Gör dem oklickbara när de är osynliga
+        } else {
+            // Menyn är stängd: Visa zoom-knapparna igen
+            zoomControls.style.opacity = '1';
+            zoomControls.style.pointerEvents = 'auto';
+        }
+    };
+}
+
+// Växla mellan Liftar och Pister i menyn
+const liftTab = document.getElementById('showLiftsTab');
+const slopeTab = document.getElementById('showSlopesTab');
+
+if (liftTab) {
+    liftTab.onclick = (e) => {
+        document.querySelectorAll('.map-menu-tabs button').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        renderMapSideMenu('lift');
+    };
+}
+
+if (slopeTab) {
+    slopeTab.onclick = (e) => {
+        document.querySelectorAll('.map-menu-tabs button').forEach(b => b.classList.remove('active'));
+        e.target.classList.add('active');
+        renderMapSideMenu('slope');
+    };
+}
 
 
 // ==========================================
@@ -1318,3 +1701,4 @@ if (touchMapContainer && touchMapImg) {
         touchMapImg.style.transform = `translate(${mapTranslateX}px, ${mapTranslateY}px) scale(${mapScale})`;
     }, { passive: false });
 }
+

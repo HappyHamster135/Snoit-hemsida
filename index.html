@@ -96,17 +96,26 @@
                     
                     <h3 id="modalLiftName" style="text-align: center; margin-top: 5px; margin-bottom: 10px; color: #1e293b;">Liftnamn</h3>
                     
-                    <div class="zoom-controls">
+                    <button id="toggleMapMenu" class="map-menu-btn" style="position: absolute; top: 20px; left: 20px; z-index: 3010;">»</button>
+
+                    <div id="mapZoomControls" class="zoom-controls" style="position: absolute; top: 70px; left: 20px; bottom: auto; right: auto; z-index: 3010; display: flex; flex-direction: column; gap: 8px; transition: opacity 0.3s ease;">
                         <button id="zoomInBtn">+</button>
                         <button id="zoomOutBtn">-</button>
+                    </div>
+
+                    <div id="mapSideMenu" class="map-side-menu hidden">
+                        <div class="map-menu-tabs">
+                            <button id="showLiftsTab" class="active">Liftar</button>
+                            <button id="showSlopesTab">Pister</button>
+                        </div>
+                        <ul id="mapMenuList" class="map-menu-list">
+                        </ul>
                     </div>
 
                     <div id="mapScrollContainer" class="map-scroll-container">
                         <div id="mapZoomWrapper" class="map-zoom-wrapper">
                             <img id="modalMapImage" src="..." draggable="false">
-                            
                             <div id="modalAllCrossesContainer"></div> 
-
                             <div id="modalCrossesContainer"></div>
                         </div>
                     </div>

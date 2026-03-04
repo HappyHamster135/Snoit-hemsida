@@ -1002,3 +1002,134 @@ details ul, .lift-list {
     background-color: transparent; /* Ingen "lysande" bakgrund här */
     font-weight: 800;              /* Gör texten extra fet */
 }
+
+
+/* Knapp för att öppna menyn på kartan */
+.map-menu-btn {
+    font-size: 20px !important;
+    background: white !important; /* Ändrad till vit */
+    color: #333 !important;       /* Mörkgrå pil */
+    border-radius: 8px !important; 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.3s;
+}
+
+.map-menu-btn.open {
+    transform: rotate(180deg);
+}
+
+/* Den utfällbara menyn */
+.map-side-menu {
+    position: absolute;
+    top: 70px;
+    left: 20px;
+    bottom: 20px;
+    width: 220px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(5px);
+    z-index: 3005;
+    border-radius: 12px;
+    box-shadow: 5px 0 15px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.3s ease, opacity 0.3s;
+}
+
+.map-side-menu.hidden {
+    transform: translateX(-250px);
+    opacity: 0;
+    display: flex !important; /* Hindrar JS från att ta bort elementet */
+}
+
+/* Tab-omkopplare högst upp i menyn */
+.map-menu-tabs {
+    display: flex;
+    border-bottom: 1px solid #eee;
+}
+
+.map-menu-tabs button {
+    flex: 1;
+    padding: 10px;
+    background: none;
+    color: #666;
+    font-size: 13px;
+    border-radius: 0;
+}
+
+.map-menu-tabs button.active {
+    background: #f1f5f9;
+    color: #006A71;
+    font-weight: bold;
+}
+
+/* Själva listan */
+.map-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.map-menu-list li {
+    padding: 10px 15px 10px 45px; /* Mer indrag för namnen under ikonen */
+    font-size: 13px;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.map-menu-list details {
+    border-bottom: 1px solid #eee;
+}
+
+.map-menu-list summary {
+    padding: 12px 15px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    background: #fff;
+}
+
+.map-menu-list summary::-webkit-details-marker { display: none; }
+
+.map-menu-list ul {
+    margin: 0;
+    padding: 0;
+    background: #fcfcfc;
+}
+
+.map-menu-list li:hover {
+    background: #eef2ff;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+
+/* Lägg till pilen för dragspelsmenyerna inuti kartan */
+.map-menu-list details summary::after {
+    content: "▼";
+    font-size: 10px;
+    color: #94a3b8;
+    margin-left: 10px;
+    transition: transform 0.2s;
+    display: inline-block;
+}
+
+/* Vänd pilen uppåt när menyn är öppen */
+.map-menu-list details[open] summary::after {
+    transform: rotate(180deg);
+}
