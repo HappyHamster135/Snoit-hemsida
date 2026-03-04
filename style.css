@@ -1,0 +1,882 @@
+/* ==========================================
+   --- GRUNDSTYLING & LAYOUT ---
+   ========================================== */
+
+body {
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: #F2EFE7; /* Mjuk bakgrundsfärg för kontrast mot den vita containern */
+    color: #334155;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Huvudboxen som håller allt innehåll centrerat på skärmen */
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+    text-align: center;
+    max-width: 480px;
+    width: 90%;
+    margin: 20px;
+}
+
+h1 { 
+    margin-top: 0; 
+    color: #006A71; 
+    font-size: 32px; 
+}
+
+p { 
+    color: #64748b; 
+    margin-bottom: 25px; 
+}
+
+
+/* ==========================================
+   --- KONTROLLER: KNAPPAR & DROPDOWNS ---
+   ========================================== */
+
+/* Standardknappar (t.ex. "Sök") */
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 100%;
+    transition: transform 0.2s, background 0.2s;
+}
+
+button:hover { 
+    background-color: #0056b3; 
+    transform: translateY(-2px); 
+}
+
+button#searchBtn:hover {
+    background-color: #48A6A7;
+    transform: translateY(-1px);
+}
+
+/* Sökfältet för huvudorter */
+#resortSearch {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 16px;
+    border: 2px solid #E2E8F0;
+    border-radius: 12px;
+    outline: none;
+    transition: all 0.2s;
+    box-sizing: border-box;
+}
+
+#resortSearch:focus {
+    border-color: #48A6A7;
+    box-shadow: 0 0 0 3px rgba(72, 166, 167, 0.1);
+}
+
+/* Wrappers och pilar för dropdown-beteende i sökfälten */
+.custom-dropdown {
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.dropdown-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-arrow {
+    position: absolute;
+    right: 15px;
+    font-size: 12px;
+    color: #94a3b8;
+    pointer-events: none; /* Så klick går igenom till fältet under */
+}
+
+/* Standard HTML-select (om den används som fallback) */
+select {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    background-color: #fff;
+    margin-bottom: 15px;
+    cursor: pointer;
+    appearance: none; /* Tar bort webbläsarens fula standard-pil */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 15px;
+}
+
+/* Anpassad styling för underområdes-väljare */
+.sub-area-select {
+    width: 100%;
+    padding: 14px 40px 14px 16px; 
+    font-size: 16px;
+    font-family: inherit;
+    font-weight: normal; 
+    color: #333;
+    background-color: #ffffff;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    
+    appearance: none; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 15px;
+}
+
+.sub-area-select:focus {
+    outline: none;
+    border-color: #007BFF;
+    background-color: #ffffff;
+}
+
+.sub-area-select:hover {
+    border-color: #cbd5e1;
+}
+
+#subAreaContainer {
+    margin-top: 5px;
+    margin-bottom: 12px;
+}
+
+
+/* ==========================================
+   --- SÖKRESULTAT: DROPDOWN-MENY ---
+   ========================================== */
+
+.dropdown-menu {
+    position: absolute;
+    top: 105%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: none;
+    border-radius: 16px;
+    padding: 8px;
+    list-style: none;
+    max-height: 350px;
+    overflow: auto; /* Använder 'auto' för scroll istället för scrollbar-hacks om möjligt */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    z-index: 2000;
+    margin-top: 8px;
+    
+    /* Animationer för när menyn visas/döljs */
+    transition: visibility 0.2s, opacity 0.2s ease-out, transform 0.2s ease-out;
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Hantering av animationen när klassen .hidden är applicerad */
+.dropdown-menu.hidden {
+    display: block !important; 
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-10px); 
+    pointer-events: none; 
+}
+
+/* Anpassning av scrollbaren i dropdown-menyn för Webkit-läsare */
+.dropdown-menu::-webkit-scrollbar {
+    width: 6px;
+}
+.dropdown-menu::-webkit-scrollbar-thumb {
+    background: #cbd5e0; 
+    border-radius: 10px;
+}
+.dropdown-menu::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Styling för varje ort i söklistan */
+.dropdown-menu li {
+    padding: 14px 18px;
+    margin: 2px 0;
+    border-radius: 10px;
+    font-weight: 500;
+    color: #334155;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.dropdown-menu li:hover {
+    background-color: #eff6ff;
+    color: #007BFF;
+}
+
+.dropdown-menu li.is-selected {
+    background-color: #e0f2fe;
+    color: #007BFF;
+    font-weight: bold;
+}
+
+.dropdown-menu li .country-tag {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 3px 8px;
+    font-size: 12px;
+    color: #94a3b8;
+    background: #f1f5f9;
+    border-radius: 4px;
+}
+
+
+/* ==========================================
+   --- STARTSIDA: INFOMATIONSBOX ---
+   ========================================== */
+
+.intro-info-box {
+    background-color: #f8fafc; 
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px;
+    margin-top: 25px;
+    text-align: left;
+}
+
+.intro-info-box h3 {
+    margin-top: 0;
+    font-size: 16px;
+    color: #334155;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.intro-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.intro-features li {
+    display: flex;
+    align-items: center;
+}
+
+.intro-emoji {
+    font-size: 24px;
+    background: white;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    margin-right: 15px;
+    flex-shrink: 0; 
+}
+
+.intro-features strong {
+    display: block;
+    color: #1e293b;
+    font-size: 15px;
+    margin-bottom: 2px;
+}
+
+.intro-features p {
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+
+/* ==========================================
+   --- FLIKAR (TABS) FÖR UNDEROMRÅDEN ---
+   ========================================== */
+
+.tabs-wrapper {
+    display: flex;
+    justify-content: space-around;
+    border-bottom: 1px solid #E2E8F0;
+    margin: 20px 0;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 12px 10px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #94a3b8;
+    cursor: pointer;
+    position: relative;
+}
+
+.tab-btn.is-active {
+    color: #006A71;
+}
+
+/* Blått streck under den aktiva fliken */
+.tab-btn.is-active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #006A71;
+    border-radius: 2px 2px 0 0;
+}
+
+
+/* ==========================================
+   --- VÄDER & SNÖ-RESULTAT ---
+   ========================================== */
+
+.result-box {
+    margin-top: 25px;
+    padding: 20px;
+    background-color: #fcfdfd;
+    border-radius: 20px;
+    border: 1px solid #E2E8F0;
+}
+
+.data-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.data-block { 
+    display: flex; 
+    flex-direction: column; 
+}
+
+.label { 
+    font-size: 12px; 
+    color: #94a3b8; 
+    text-transform: uppercase; 
+    font-weight: bold; 
+    margin-bottom: 5px; 
+}
+
+.depth { 
+    font-size: 28px; 
+    font-weight: 800; 
+    color: #1e293b; 
+}
+
+.piste-color { 
+    color: #48A6A7; 
+}
+
+/* Väder-modulen ("Dashboard") */
+.weather-dashboard {
+    display: flex;
+    justify-content: space-between;
+    background: white;
+    padding: 15px;
+    border-radius: 16px;
+    border: 1px solid #E2E8F0;
+}
+
+.weather-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+}
+
+.weather-emoji {
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.weather-value { 
+    font-size: 18px; 
+    font-weight: 800; 
+    color: #006A71; 
+}
+
+.disclaimer {
+    margin-top: 20px;
+    font-size: 11px;
+    color: #a0aec0;
+    font-style: italic;
+    margin-bottom: 0;
+}
+
+
+/* ==========================================
+   --- LIFTAR & PISTER: DRAGSPELSMENYER ---
+   ========================================== */
+
+.lift-status-container {
+    text-align: left;
+    margin-top: 20px;
+}
+
+.lift-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 2px solid #f1f5f9;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.lift-header {
+    font-size: 16px;
+    margin: 0;
+    color: #2d3748;
+}
+
+.lift-stats {
+    font-size: 13px;
+    font-weight: bold;
+    color: #3182ce;
+}
+
+/* Huvud-dragspelen (Liftar & Backar) */
+.status-accordion {
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    background: white;
+}
+
+/* Under-dragspelen (Färg/Lifttyp) */
+.sub-accordion {
+    border-bottom: 1px solid #f1f5f9;
+}
+.sub-accordion:last-child {
+    border-bottom: none;
+}
+
+/* Standard rubrik-styling för dragspel */
+.status-accordion summary,
+.sub-accordion summary {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box; 
+    cursor: pointer;
+}
+
+.status-accordion summary {
+    padding: 14px;
+    font-weight: 700;
+}
+.status-accordion summary:hover {
+    background-color: #f1f5f9;
+}
+
+.sub-accordion summary {
+    padding: 10px 16px;
+    transition: background 0.2s, box-shadow 0.2s;
+    border-radius: 6px;
+}
+.sub-accordion summary:hover {
+    background-color: #f1f5f9;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Döljer standardpilarna i webbläsarna för <details> */
+details summary::-webkit-details-marker,
+.status-accordion summary::-webkit-details-marker {
+    display: none; 
+}
+
+/* Egendefinierade pilar för huvudmenyerna */
+.status-accordion summary::after {
+    content: "▼";
+    float: right;
+    font-size: 12px;
+    color: #94a3b8;
+    margin-top: 2px;
+    display: block;
+}
+.status-accordion[open] summary::after {
+    content: "▲";
+}
+
+/* Inga pilar på undermenyerna */
+.sub-accordion summary::after {
+    display: none; 
+}
+
+/* Siffran över antal öppna i underkategorin */
+.sub-count {
+    margin-left: auto;
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+/* Fix för den animerade JS-höjden */
+details ul, .lift-list {
+    box-sizing: border-box;
+}
+
+/* Listan över specifika liftar/pister i dragspelen */
+.lift-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-height: 250px; 
+    overflow-y: auto;
+}
+
+.lift-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f7fafc;
+    font-size: 14px;
+    color: #4a5568;
+}
+
+.clickable-row {
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.clickable-row:hover {
+    background: #f1f5f9;
+}
+
+.status-open { color: #48A6A7; font-weight: bold; }
+.status-closed { color: #e53e3e; }
+
+
+/* ==========================================
+   --- IKONER FÖR PISTER OCH LIFTAR ---
+   ========================================== */
+
+/* Slot som håller alla ikoner centrerade i rad */
+.icon-slot {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    width: 32px; 
+    min-width: 32px;
+    margin-right: 12px; 
+}
+
+/* Nollställer gamla marginaler så .icon-slot kan ta över */
+.header-icon, 
+.lift-icon-img, 
+.park-icon-img, 
+.difficulty-icon {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* Bilder för liftar och parker */
+.lift-icon-img {
+    height: 28px; 
+    width: 28px; 
+    object-fit: contain; 
+    vertical-align: middle; 
+}
+
+.park-icon-img {
+    height: 26px; 
+    width: 26px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+.header-icon {
+    height: 40px; 
+    width: 40px;
+    object-fit: contain;
+}
+
+/* Färgkodade geometriska former för pist-svårighet */
+.difficulty-icon {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    vertical-align: middle;
+}
+
+.icon-very-easy {
+    background-color: #28a745;
+    border-radius: 50%;
+}
+.icon-easy {
+    background-color: #007bff;
+    border-radius: 2px;
+}
+.icon-intermediate {
+    background-color: #dc3545;
+    width: 14px;
+    height: 10px;
+    border-radius: 2px;
+}
+.icon-difficult {
+    background-color: #000;
+    width: 10px;
+    height: 10px;
+    transform: rotate(45deg);
+    margin-left: 2px; 
+}
+
+
+/* ==========================================
+   --- FULLSKÄRMSKARTA (MODAL) OCH ZOOM ---
+   ========================================== */
+
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Döljer text över bilden om den följer med i HTML:en */
+.modal-content h1, 
+.modal-content h2, 
+.modal-content h3, 
+.modal-content p,
+.modal-header {
+    display: none !important;
+}
+
+.modal-content {
+    background: white;
+    width: 95%;
+    max-width: 1100px;
+    border-radius: 20px;
+    padding: 0 !important; 
+    position: relative;
+    overflow: hidden; 
+    box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    display: flex; 
+    flex-direction: column;
+}
+
+.modal-map-container {
+    margin: 0;
+    padding: 0;
+}
+
+#modalMapImage {
+    width: 100%;
+    display: block;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none; 
+}
+
+/* Kartans fönster som kan scrollas och dras inuti */
+.map-scroll-container {
+    height: 75vh;
+    width: 100%;
+    overflow: hidden;    
+    position: relative;
+    background: #F2EFE7;
+    cursor: grab;
+    border-radius: 12px;
+}
+
+.map-scroll-container:active {
+    cursor: grabbing; 
+}
+
+/* Innehåller kartan och anpassar sig efter zoom-nivån från JS */
+.map-zoom-wrapper {
+    position: relative; 
+    width: 300%; 
+    transform-origin: top left;
+}
+.map-zoom-wrapper img {
+    width: 100%;
+    display: block;
+}
+
+/* --- KARTANS KONTROLLER (+, -, X) --- */
+
+.close-modal {
+    position: absolute;
+    top: 20px;    
+    right: 20px;  
+    z-index: 3010;
+    background: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    
+    font-size: 24px;   
+    line-height: 1;    
+    font-family: Arial, sans-serif; 
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease-in-out;
+}
+.close-modal:hover {
+    transform: scale(1.1); 
+}
+
+.zoom-controls {
+    position: absolute;
+    top: 20px;     
+    left: 20px;    
+    z-index: 3010; 
+    display: flex;
+    flex-direction: column; 
+    gap: 8px;      
+}
+
+.zoom-controls button {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    background: white;
+    border: none;  
+    border-radius: 8px; 
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    color: #334155;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    line-height: 1; 
+}
+.zoom-controls button:active {
+    background: #f8fafc;
+    transform: scale(0.95);
+}
+
+
+/* ==========================================
+   --- KARTANS MARKÖRER (RADAR & KRYSS) ---
+   ========================================== */
+
+/* Markerar stängda liftar/pister med ett rött kryss över hela kartan */
+.closed-cross {
+    position: absolute;
+    color: red;
+    font-size: 24px;
+    font-weight: bold;
+    transform: translate(-50%, -50%); 
+    text-shadow: 0px 0px 3px white; 
+    pointer-events: none; 
+}
+
+/* Radarmarkören som blinkar när man sökt på specifik lift/backe */
+.highlight-marker {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(239, 68, 68, 0.7); 
+    border: 2px solid #ef4444;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: opacity 0.4s ease; 
+    animation: radarPing 1.5s ease-out infinite;
+}
+
+.highlight-marker::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+@keyframes radarPing {
+    0% { 
+        transform: translate(-50%, -50%) scale(0.8); 
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.8); 
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.1); 
+        box-shadow: 0 0 0 40px rgba(239, 68, 68, 0); 
+    }
+    100% { 
+        transform: translate(-50%, -50%) scale(0.8); 
+        box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); 
+    }
+}
+
+
+/* ==========================================
+   --- ÖVRIGT OCH HJÄLPKLASSER ---
+   ========================================== */
+
+.hidden { 
+    display: none; 
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.ad-space { 
+    margin-top: 30px; 
+    font-size: 13px; 
+    border-top: 1px solid #f1f5f9; 
+    padding-top: 20px; 
+}
+.ad-space a { 
+    color: #007BFF; 
+    text-decoration: none; 
+    font-weight: bold; 
+}
+
+/* Hantering av eventuella z-index krockar */
+#resortList {
+    z-index: 2000;
+}
+#subAreaList {
+    z-index: 1000;
+}

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snöit ❄️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Snöit ❄️</h1>
+        <p>Välj en skidort för att se aktuellt snödjup.</p>
+
+        <div class="search-box">
+            <div class="custom-dropdown">
+                <div class="dropdown-input-wrapper">
+                    <input type="text" id="resortSearch" placeholder="Sök skidort i Skandinavien..." autocomplete="off">
+                    <span class="dropdown-arrow">▼</span>
+                </div>
+                <ul id="resortList" class="dropdown-menu hidden"></ul>
+            </div>
+            
+            <div id="subAreaContainer" class="hidden" style="margin-top: 20px; margin-bottom: 20px;">
+                <div id="subAreaTabs" class="tabs-wrapper"></div>
+            </div>
+
+                <button id="searchBtn">Visa snödjup</button>
+        </div>
+        <div class="intro-info-box">
+            <h3>Din guide till fjällen</h3>
+            <ul class="intro-features">
+                <li>
+                    <span class="intro-emoji">❄️</span>
+                    <div>
+                        <strong>Snödjup & Väder</strong>
+                        <p>Aktuella prognoser och temperaturer för både dal och topp.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="intro-emoji">🚠</span>
+                    <div>
+                        <strong>Liftar & Pister i realtid</strong>
+                        <p>Se exakt vilka backar och liftar som är öppna just nu.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="intro-emoji">🗺️</span>
+                    <div>
+                        <strong>Interaktiva pistkartor</strong>
+                        <p>Hitta rätt direkt på kartan med vår smarta radarfunktion.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div id="result" class="result-box hidden">
+            <div class="location-header" style="margin-bottom: 15px;">
+                <h2 id="cityName" style="margin: 0; font-size: 24px;">Ort</h2>
+            </div>
+            
+            <div class="data-container">
+                <div class="data-block">
+                    <span class="label" id="labelSnow">Terräng</span>
+                    <span id="snowDepth" class="depth">...</span>
+                </div>
+                <div class="data-block">
+                    <span class="label" id="labelPiste">Pist</span>
+                    <span id="pisteDepth" class="depth piste-color">...</span>
+                </div>
+                <div class="data-block">
+                    <span class="label">Öppettider</span>
+                    <span id="openHours" class="depth" style="color: #ed8936;">...</span>
+                </div>
+            </div>
+
+            <div class="weather-dashboard">
+                <div class="weather-item">
+                    <span id="topLabel" class="label">Topp</span>
+                    <span id="topTemp" class="weather-value">...</span>
+                    <span id="topWind" class="weather-value" style="font-size: 15px;">...</span>
+                </div>
+                <div class="weather-item" style="border-left: 1px solid #edf2f7; border-right: 1px solid #edf2f7; padding: 0 15px; justify-content: center;">
+                    <span class="label">Väder</span>
+                    <span id="weatherIcon" class="weather-emoji">⛅</span>
+                    <span id="weatherDesc" style="font-size: 13px; font-weight: bold; color: #4a5568; margin-top: 5px;">...</span>
+                </div>
+                <div class="weather-item">
+                    <span id="valleyLabel" class="label">Dal</span>
+                    <span id="valleyTemp" class="weather-value">...</span>
+                    <span id="valleyWind" class="weather-value" style="font-size: 15px;">...</span>
+                </div>
+            </div>
+            
+            <div id="mapModal" class="modal hidden">
+                <div class="modal-content" style="position: relative;">
+                    <div class="close-modal">&times;</div>
+                    
+                    <h3 id="modalLiftName" style="text-align: center; margin-top: 5px; margin-bottom: 10px; color: #1e293b;">Liftnamn</h3>
+                    
+                    <div class="zoom-controls">
+                        <button id="zoomInBtn">+</button>
+                        <button id="zoomOutBtn">-</button>
+                    </div>
+
+                    <div id="mapScrollContainer" class="map-scroll-container">
+                        <div id="mapZoomWrapper" class="map-zoom-wrapper">
+                            <img id="modalMapImage" src="..." draggable="false">
+                            
+                            <div id="modalAllCrossesContainer"></div> 
+
+                            <div id="modalCrossesContainer"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="liftContainer" class="lift-status-container hidden">
+                <div class="lift-header-row">
+                    <h3 class="lift-header">Öppna Liftar & Backar</h3>
+                    <span id="liftStats" class="lift-stats">Laddar...</span>
+                </div>
+                
+                <details class="status-accordion">
+                    <summary>
+                        <span class="icon-slot"><img src="pics/lyft.png" alt="Lift" class="header-icon"></span>
+                        <span style="font-weight: bold; flex-grow: 1;">Liftar</span> (<span id="liftCount">0/0</span>)
+                    </summary>
+                    <div id="liftsOnlyList"></div> 
+                </details>
+
+                <details class="status-accordion">
+                    <summary>
+                        <span class="icon-slot"><img src="pics/skidor.png" alt="Backar" class="header-icon"></span>
+                        <span style="font-weight: bold; flex-grow: 1;">Backar</span> (<span id="slopeCount">0/0</span>)
+                    </summary>
+                    <div id="slopesOnlyList"></div>
+                </details>
+            </div>
+
+            <p class="disclaimer">För officiella öppettider, besök anläggningens hemsida.</p>
+        </div>
+
+        <aside class="ad-space">
+            <p>Hjälpte sidan dig? ☕ <a href="https://ko-fi.com/jonathanwenell" target="_blank">Bjud på en kaffe</a></p>
+        </aside>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
