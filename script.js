@@ -1105,25 +1105,6 @@ document.getElementById('mapModal').addEventListener('click', (e) => {
     if (e.target.id === 'mapModal') closeModal(); // Stänger om man klickar på bakgrunden
 });
 
-// Enbart för utveckling: Hjälper till att hitta och logga koordinater (vänster/topp) på kartan
-document.getElementById('mapZoomWrapper').addEventListener('click', (e) => {
-    if (isDragging) return; 
-
-    const rect = mapZoomWrapper.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const percentX = (x / mapZoomWrapper.clientWidth) * 100;
-    const percentY = (y / mapZoomWrapper.clientHeight) * 100;
-
-    const name = prompt("Vad heter liften/backen du precis klickade på?");
-    
-    if (name) {
-        const output = `{ name: "${name.trim()}", left: ${percentX.toFixed(2)}, top: ${percentY.toFixed(2)} },`;
-        console.log(output);
-    }
-});
-
 
 // ==========================================
 // --- ANIMERADE DRAGSPELSMENYER ---
