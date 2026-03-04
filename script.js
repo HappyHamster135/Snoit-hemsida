@@ -1638,67 +1638,95 @@ if (coffeeBtn) {
 
 
 // ==========================================
-// --- KARTA: ZOOM OCH PANORERING (MOBIL) ---
+// --- TOUCH-LOGIK: PANORERING OCH PINCH-ZOOM (MOBIL) ---
 // ==========================================
+let pinchStartDist = 0;
+let pinchStartZoom = 0;
+let pinchCenterX = 0;
+let pinchCenterY = 0;
+let pinchStartScrollLeft = 0;
+let pinchStartScrollTop = 0;
 
-const touchMapImg = document.getElementById('modalMapImage');
-const touchMapContainer = document.getElementById('mapScrollContainer');
-
-let mapScale = 1;
-let mapTranslateX = 0;
-let mapTranslateY = 0;
-let mapStartX = 0;
-let mapStartY = 0;
-let mapStartDist = 0;
-let mapInitialScale = 1;
-
-window.resetMapZoom = function() {
-    mapScale = 1;
-    mapTranslateX = 0;
-    mapTranslateY = 0;
-    if (touchMapImg) {
-        touchMapImg.style.transform = `translate(0px, 0px) scale(1)`;
-    }
-};
-
-if (touchMapContainer && touchMapImg) {
-    touchMapContainer.addEventListener('touchstart', (e) => {
-        if (e.touches.length === 2) {
-            mapStartDist = Math.hypot(
-                e.touches[0].pageX - e.touches[1].pageX,
-                e.touches[0].pageY - e.touches[1].pageY
-            );
-            mapInitialScale = mapScale;
-        } else if (e.touches.length === 1) {
-            mapStartX = e.touches[0].pageX - mapTranslateX;
-            mapStartY = e.touches[0].pageY - mapTranslateY;
-        }
-    }, { passive: false });
-
-    touchMapContainer.addEventListener('touchmove', (e) => {
-        // Kör bara touch-zoom om vi faktiskt ser kartan (så dropdowns inte påverkas)
-        if (document.getElementById('mapModal').classList.contains('hidden')) return;
+mapScrollContainer.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+        // Ett finger: Starta vanlig panorering
+        isDragging = true;
+        startX = e.touches[0].pageX - mapScrollContainer.offsetLeft;
+        startY = e.touches[0].pageY - mapScrollContainer.offsetTop;
+        scrollLeft = mapScrollContainer.scrollLeft;
+        scrollTop = mapScrollContainer.scrollTop;
+    } else if (e.touches.length === 2) {
+        // Två fingrar: Starta Pinch-zoom!
+        isDragging = false; // Avbryt panorering
         
-        e.preventDefault(); 
+        const dx = e.touches[0].pageX - e.touches[1].pageX;
+        const dy = e.touches[0].pageY - e.touches[1].pageY;
+        pinchStartDist = Math.hypot(dx, dy);
+        pinchStartZoom = currentZoom;
 
-        if (e.touches.length === 2) {
-            const currentDistance = Math.hypot(
-                e.touches[0].pageX - e.touches[1].pageX,
-                e.touches[0].pageY - e.touches[1].pageY
-            );
-            const zoomFactor = currentDistance / mapStartDist;
-            mapScale = Math.min(Math.max(1, mapInitialScale * zoomFactor), 4); 
-            
-            if (mapScale === 1) {
-                mapTranslateX = 0;
-                mapTranslateY = 0;
-            }
-        } else if (e.touches.length === 1 && mapScale > 1) {
-            mapTranslateX = e.touches[0].pageX - mapStartX;
-            mapTranslateY = e.touches[0].pageY - mapStartY;
-        }
+        // Räkna ut exakt var mitten mellan dina två fingrar är på skärmen
+        const screenCenterX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+        const screenCenterY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
 
-        touchMapImg.style.transform = `translate(${mapTranslateX}px, ${mapTranslateY}px) scale(${mapScale})`;
-    }, { passive: false });
-}
+        const rect = mapScrollContainer.getBoundingClientRect();
+        pinchCenterX = screenCenterX - rect.left;
+        pinchCenterY = screenCenterY - rect.top;
 
+        pinchStartScrollLeft = mapScrollContainer.scrollLeft;
+        pinchStartScrollTop = mapScrollContainer.scrollTop;
+    }
+}, { passive: false });
+
+mapScrollContainer.addEventListener('touchmove', (e) => {
+    // Om kartan inte visas, strunta i touch-eventet
+    if (document.getElementById('mapModal').classList.contains('hidden')) return;
+    
+    // Förhindra att webbläsaren drar ner sidan (pull-to-refresh)
+    if (e.cancelable) e.preventDefault(); 
+    fadeOutMarker();
+
+    if (e.touches.length === 1 && isDragging) {
+        // Ett finger: Dra kartan (scrolla)
+        const walkX = (e.touches[0].pageX - mapScrollContainer.offsetLeft - startX); 
+        const walkY = (e.touches[0].pageY - mapScrollContainer.offsetTop - startY);
+        mapScrollContainer.scrollLeft = scrollLeft - walkX;
+        mapScrollContainer.scrollTop = scrollTop - walkY;
+        
+    } else if (e.touches.length === 2) {
+        // Två fingrar: Zooma in precis där fingrarna är
+        const dx = e.touches[0].pageX - e.touches[1].pageX;
+        const dy = e.touches[0].pageY - e.touches[1].pageY;
+        const dist = Math.hypot(dx, dy);
+
+        // Räkna ut den nya zoomen
+        const zoomFactor = dist / pinchStartDist;
+        let newZoom = pinchStartZoom * zoomFactor;
+        
+        // Lås zoomen så du inte kan zooma hur långt in/ut som helst
+        newZoom = Math.min(Math.max(newZoom, minZoom), 800);
+        
+        // Applicera zoomen på själva wrappern (vilket gör att kryssen följer med!)
+        mapZoomWrapper.style.width = newZoom + '%';
+
+        // Matematik för att flytta kameran så att punkten mellan fingrarna ligger stilla
+        const scaleRatio = newZoom / pinchStartZoom;
+        const pointX = pinchStartScrollLeft + pinchCenterX;
+        const pointY = pinchStartScrollTop + pinchCenterY;
+        const newPointX = pointX * scaleRatio;
+        const newPointY = pointY * scaleRatio;
+
+        mapScrollContainer.scrollLeft = newPointX - pinchCenterX;
+        mapScrollContainer.scrollTop = newPointY - pinchCenterY;
+        
+        currentZoom = newZoom; // Spara den nya zoomnivån
+    }
+}, { passive: false });
+
+window.addEventListener('touchend', (e) => {
+    if (e.touches.length < 2) {
+        pinchStartDist = 0; // Återställ pinch om man släpper ett finger
+    }
+    if (e.touches.length === 0) {
+        isDragging = false; // Sluta dra om man släpper alla fingrar
+    }
+});
