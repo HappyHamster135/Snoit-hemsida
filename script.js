@@ -798,17 +798,22 @@ async function fetchSkistarMainPage(simpleViewUrl) {
     } catch (error) {
         console.error("Serverfel, hämtar från cache:", error);
         
-        // Hämta från minnet vid fel
         const cached = getFromCache(cacheKey);
         if (cached) {
-            document.getElementById('liftsOnlyList').innerHTML = cached.content.liftsHtml;
-            document.getElementById('slopesOnlyList').innerHTML = cached.content.slopesHtml;
+            // Här hämtar vi exakt de variabler vi sparade i saveToCache ovan
+            const c = cached.content; 
             
-            updateText('liftStats', cached.content.stats + " (Sparad info)");
-            updateText('liftCount', cached.content.liftCount);
-            updateText('slopeCount', cached.content.slopeCount);
+            updateText('snowDepth', c.snow + " (Cache)", true);
+            updateText('pisteDepth', c.piste, true);
+            updateText('openHours', c.hours, true);
+            updateText('topTemp', c.topTemp);
+            updateText('valleyTemp', c.valleyTemp);
+            updateText('topWind', c.topWind);
+            updateText('valleyWind', c.valleyWind);
+            
+            console.log("Visar sparad snödata från:", cached.timestamp);
         } else {
-            updateText('liftStats', "Kunde inte nå servern.");
+            updateText('snowDepth', "Offline");
         }
     }
 }
