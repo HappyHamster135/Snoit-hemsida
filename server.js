@@ -6,6 +6,12 @@ const app = express();
 
 app.use(cors());
 
+
+app.get('/', (req, res) => {
+    res.status(200).send('Snöit API är vaken och körs! ❄️');
+});
+
+
 app.get('/scrape', async (req, res) => {
     const apiKey = req.headers['x-api-key'];
     const targetUrl = req.query.url; 
