@@ -714,7 +714,6 @@ async function fetchSkistarLifts(targetUrl) {
             const items = group.querySelectorAll('.lpv-list__item');
             const categoryItems = [];
 
-            // Extrahera data för varje enskild lift/backe i kategorin
             items.forEach(item => {
                 const nameElement = item.querySelector('.lpv-list__item-name');
                 const statusElement = item.querySelector('.lpv-list__item-status');
@@ -723,7 +722,10 @@ async function fetchSkistarLifts(targetUrl) {
                     const name = nameElement.textContent.trim();
                     const statusText = statusElement.textContent.trim().replace(/\s+/g, ' ');
                     const isOpen = statusElement.classList.contains('lpv-list__item-status--is-open');
-                    categoryItems.push({ name, status: statusText, isOpen });
+                    
+                    if (!categoryItems.some(i => i.name === name)) {
+                        categoryItems.push({ name, status: statusText, isOpen });
+                    }
                 }
             });
 
@@ -837,41 +839,35 @@ async function fetchSkistarLifts(targetUrl) {
                 const ul = document.createElement('ul');
                 ul.className = 'lift-list';
                 
-                // Rita ut varje enskild lift/backe i kategorin
+                // 1. Fråga registret EN GÅNG för hela gruppen
+                const hasMap = Object.keys(mapRegistry).some(key => targetUrl.includes(key));
+
+                // 2. Rita ut varje enskild lift/backe i kategorin (Bara EN loop!)
                 group.items.forEach(item => {
                     const li = document.createElement('li');
                     const statusClass = item.isOpen ? 'status-open' : 'status-closed';
                     
-                    // 1. Fråga registret: Har vi en karta för den här orten (targetUrl)?
-                    const hasMap = Object.keys(mapRegistry).some(key => targetUrl.includes(key));
+                    // Lägg till klick-funktionen om en karta finns
+                    if (hasMap) {
+                        li.classList.add('clickable-row');
+                        li.addEventListener('click', () => {
+                            openFullscreenMap(item.name, targetUrl, allScrapedItems); 
+                        });
+                    } else {
+                        li.style.cursor = 'default';
+                    }
 
-                    // Rita ut varje enskild lift/backe i kategorin
-                    group.items.forEach(item => {
-                        const li = document.createElement('li');
-                        const statusClass = item.isOpen ? 'status-open' : 'status-closed';
-                        
-                        // 2. Lägg BARA till klick-funktionen om hasMap är true
-                        if (hasMap) {
-                            li.classList.add('clickable-row');
-                            li.addEventListener('click', () => {
-                                openFullscreenMap(item.name, targetUrl, allScrapedItems); 
-                            });
-                        } else {
-                            // Annars, låt muspekaren vara en vanlig pil (inte en klick-hand)
-                            li.style.cursor = 'default';
-                        }
-
-                        li.innerHTML = `
-                            <div style="display: flex; align-items: center;">
-                                ${categoryIcon}
-                                <span>${item.name}</span>
-                            </div>
-                            <span class="${statusClass}">${item.status}</span>
-                        `;
-                        ul.appendChild(li);
-                    });
+                    li.innerHTML = `
+                        <div style="display: flex; align-items: center;">
+                            ${categoryIcon}
+                            <span>${item.name}</span>
+                        </div>
+                        <span class="${statusClass}">${item.status}</span>
+                    `;
+                    ul.appendChild(li);
                 });
 
+                details.appendChild(summary);
                 details.appendChild(ul);
                 container.appendChild(details);
             });
